@@ -1,1 +1,108 @@
+package com.example.activitylifecycle
+
+import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.activitylifecycle.ui.theme.ActivityLifecycleTheme
+
+class MainActivity : ComponentActivity() {
+
+    private val TAG = "LifecycleDemo"
+
+    // this variable will hold the last lifecycle event message
+    private var lifecycleMessage by mutableStateOf("")
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        showMessage("onCreate called")
+
+        setContent {
+            ActivityLifecycleTheme {
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                ) { innerPadding ->
+                    Column(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding)
+                            .padding(16.dp),
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "Activity Lifecycle",
+                            style = MaterialTheme.typography.titleLarge
+                        )
+                        Spacer(modifier = Modifier.height(16.dp))
+                        Text(
+                            text = lifecycleMessage,
+                            style = MaterialTheme.typography.bodyLarge
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        showMessage("onStart called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        showMessage("onResume called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        showMessage("onPause called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        showMessage("onStop called")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        showMessage("onRestart called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        showMessage("onDestroy called")
+    }
+
+
+    private fun showMessage(msg: String) {
+        lifecycleMessage = msg
+        Log.d(TAG, msg)
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    ActivityLifecycleTheme {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center
+        ) {
+            Text(text = "Activity Lifecycle")
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(text = "Preview: Lifecycle Message")
+        }
+    }
+}
 
