@@ -1,1 +1,90 @@
+package com.firstapp.myapplication
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.graphics.Color
+import com.firstapp.myapplication.ui.theme.MyApplicationTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            MyApplicationTheme {
+                ImageSwitcherExample()
+            }
+        }
+    }
+}
+
+@Composable
+fun ImageSwitcherExample() {
+    // Keep track of which image is currently shown
+    var isFirstImage by remember { mutableStateOf(true) }
+
+    // Image resources (use your drawable names)
+    val image1 = painterResource(id = R.drawable.image1)
+    val image2 = painterResource(id = R.drawable.image2)
+
+    // Layout
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(24.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        // Title text
+        Text(
+            text = "Image Switcher Example",
+            fontSize = 22.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black,
+            textAlign = TextAlign.Center,
+            modifier = Modifier.padding(bottom = 16.dp)
+        )
+
+        // Image with accessibility content description
+        Image(
+            painter = if (isFirstImage) image1 else image2,
+            contentDescription = if (isFirstImage) "First image" else "Second image",
+            modifier = Modifier
+                .size(220.dp)
+                .padding(8.dp)
+        )
+
+        Spacer(modifier = Modifier.height(32.dp))
+
+        // Switch button
+        Button(onClick = { isFirstImage = !isFirstImage }) {
+            Text(
+                text = if (isFirstImage) "Show Second Image" else "Show First Image",
+                fontSize = 16.sp
+            )
+        }
+    }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun PreviewImageSwitcher() {
+    MyApplicationTheme {
+        ImageSwitcherExample()
+    }
+}
+
+
 
