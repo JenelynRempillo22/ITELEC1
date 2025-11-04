@@ -1,0 +1,77 @@
+
+//MainActivity.kt
+package com.firstapp.mainactivity
+
+import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import android.view.View
+import android.widget.Button
+import android.widget.ImageSwitcher
+import android.widget.ImageView
+import android.widget.ViewSwitcher
+
+
+class MainActivity : AppCompatActivity() {
+    private var previousbtn: Button? = null
+    private var nextbtn: Button? = null
+    private var imgsw: ImageSwitcher? = null
+    private val images = intArrayOf(R.drawable.bangkok, R.drawable.bangkok2)
+    private var position = 0
+    protected override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        previousbtn = findViewById(R.id.btnPrevious) as Button
+        nextbtn = findViewById(R.id.btnNext) as Button
+        imgsw = findViewById(R.id.imgSw) as ImageSwitcher
+        imgsw!!.setFactory(object : ViewSwitcher.ViewFactory {
+            override fun makeView(): View {
+                val imgVw = ImageView(this@MainActivity)
+                imgVw.setImageResource(images[position])
+                return imgVw
+            }
+        })
+        imgsw!!.setInAnimation(this, R.anim.slide_in_left)
+        imgsw!!.setOutAnimation(this, R.anim.slide_out_right)
+        previousbtn!!.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                if (position > 0) position--
+                else if (position < 0) position = 0
+                imgsw!!.setImageResource(images[position])
+            }
+        })
+        nextbtn!!.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                if (position < images.size) position++
+                if (position >= images.size) position = images.size - 1
+                imgsw!!.setImageResource(images[position])
+            }
+        })
+    }
+
+//activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="30dp">
+    <ImageSwitcher android:id="@+id/imgSw"
+        android:layout_width="match_parent"
+        android:layout_height="480dp"/>
+    <Button
+        android:id="@+id/btnPrevious"
+        android:layout_below="@+id/imgSw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/previous"
+        android:layout_marginStart="100dp" />
+    <Button
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnPrevious"
+        android:layout_toEndOf="@+id/btnPrevious"
+        android:text="@string/next" />
+</RelativeLayout>
+}
