@@ -1,0 +1,80 @@
+//MainActivity.kt
+package com.firstapp.mainactivity
+
+import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import android.widget.ToggleButton
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+    }
+
+    fun onStandardButtonClick(view: View?) {
+        Toast.makeText(applicationContext, "Standard Button Clicked", Toast.LENGTH_SHORT).show()
+    }
+
+    fun onImageButtonClick(view: View?) {
+        Toast.makeText(applicationContext, "Image Button Clicked", Toast.LENGTH_SHORT).show()
+    }
+
+    fun onToggleButtonClick(view: View?) {
+        val toggle = view as ToggleButton
+        if (toggle.isChecked) {
+            Toast.makeText(applicationContext, "Toggle is ON", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(applicationContext, "Toggle is OFF", Toast.LENGTH_SHORT).show()
+        }
+    }
+}
+
+//activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/l_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="20dp"
+    android:background="#F2F2F2">
+
+    <!-- Standard Button -->
+    <Button
+        android:id="@+id/standardButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/standard_button"
+        android:layout_marginTop="40dp"
+        android:onClick="onStandardButtonClick" />
+
+    <!-- Image Button -->
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/image_button"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_launcher_foreground"
+        android:onClick="onImageButtonClick" />
+
+    <!-- Toggle Button -->
+    <ToggleButton
+        android:id="@+id/toggleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textOn="@string/switch_on"
+        android:textOff="Switch OFF"
+        android:checked="false"
+        android:onClick="onToggleButtonClick" />
+
+</LinearLayout>
+
+
+
+
