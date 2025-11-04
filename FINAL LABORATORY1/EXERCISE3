@@ -1,1 +1,102 @@
+//MainActivity.kt
+package com.firstapp.mainactivity
 
+import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import android.widget.EditText
+import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
+
+class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        // Step 2: EditText
+        val etUserInput = findViewById<EditText?>(R.id.etUserInput)
+
+        // Step 3: AutoCompleteTextView setup
+        val countries =
+            arrayOf<String?>("India", "USA", "Australia", "UK", "Italy", "Ireland", "South Africa")
+        val autoCompleteCountry = findViewById<AutoCompleteTextView?>(R.id.autoCompleteCountry)
+        val countryAdapter = ArrayAdapter<String?>(
+            this,
+            R.layout.simple_dropdown_item_1line, countries
+        )
+        autoCompleteCountry?.setAdapter<ArrayAdapter<String?>?>(countryAdapter)
+
+        // Step 4: Spinner setup
+        val options = arrayOf<String?>("Option 1", "Option 2", "Option 3", "Option 4", "Option 5")
+        val spinnerOptions = findViewById<Spinner?>(R.id.spinnerOptions)
+        val spinnerAdapter = ArrayAdapter<String?>(
+            this,
+            R.layout.simple_spinner_item, options
+        )
+        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+        spinnerOptions?.setAdapter(spinnerAdapter)
+    }
+}
+
+
+//activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linearlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_marginTop="10dp"
+    android:background="#FAFAFA">
+
+    <!-- Step 1: TextView for instructions -->
+    <TextView
+        android:id="@+id/tvInstructions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_your_name_choose_your_country_and_select_an_option_below"
+        android:textSize="18sp"
+        android:textColor="#000000"
+        android:layout_marginBottom="16dp"
+        android:textStyle="bold" />
+
+    <!-- Step 2: EditText for user input -->
+    <EditText
+        android:id="@+id/etUserInput"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:autofillHints=""
+        android:hint="@string/enter_your_name"
+        android:inputType="textPersonName"
+        android:layout_marginBottom="16dp"
+        android:ems="10" />
+
+    <!-- Step 3: AutoCompleteTextView with sample country suggestions -->
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteCountry"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:hint="@string/select_or_type_a_country"
+        android:inputType="text"
+        android:layout_marginBottom="16dp"
+        android:completionThreshold="1" />
+
+    <!-- Step 4: Spinner with 5 sample options -->
+    <Spinner
+        android:id="@+id/spinnerOptions"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Optional TextView to display selected info -->
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:textColor="#333333"
+        android:layout_marginTop="10dp" />
+
+</LinearLayout>
