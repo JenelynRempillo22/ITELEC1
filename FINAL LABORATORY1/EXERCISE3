@@ -1,6 +1,7 @@
 //MainActivity.kt
 package com.firstapp.mainactivity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
@@ -9,34 +10,34 @@ import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         // Step 2: EditText
-        val etUserInput = findViewById<EditText?>(R.id.etUserInput)
+        val etUserInput = findViewById<EditText>(R.id.etUserInput)
 
         // Step 3: AutoCompleteTextView setup
-        val countries =
-            arrayOf<String?>("India", "USA", "Australia", "UK", "Italy", "Ireland", "South Africa")
-        val autoCompleteCountry = findViewById<AutoCompleteTextView?>(R.id.autoCompleteCountry)
-        val countryAdapter = ArrayAdapter<String?>(
+        val countries = arrayOf("India", "USA", "Australia", "UK", "Italy", "Ireland", "South Africa")
+        val autoCompleteCountry = findViewById<AutoCompleteTextView>(R.id.autoCompleteCountry)
+        val countryAdapter = ArrayAdapter(
             this,
-            R.layout.simple_dropdown_item_1line, countries
+            android.R.layout.simple_dropdown_item_1line,
+            countries
         )
-        autoCompleteCountry?.setAdapter<ArrayAdapter<String?>?>(countryAdapter)
+        autoCompleteCountry.setAdapter(countryAdapter)
 
         // Step 4: Spinner setup
-        val options = arrayOf<String?>("Option 1", "Option 2", "Option 3", "Option 4", "Option 5")
-        val spinnerOptions = findViewById<Spinner?>(R.id.spinnerOptions)
-        val spinnerAdapter = ArrayAdapter<String?>(
+        val options = arrayOf("Options","India", "USA", "Australia", "UK", "Italy", "Ireland", "South Africa")
+        val spinnerOptions = findViewById<Spinner>(R.id.spinnerOptions)
+        val spinnerAdapter = ArrayAdapter(
             this,
-            R.layout.simple_spinner_item, options
+            android.R.layout.simple_spinner_item,
+            options
         )
-        spinnerAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
-        spinnerOptions?.setAdapter(spinnerAdapter)
-    }
-}
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerOptions.adapter = spinnerAdapter
 
 
 //activity_main.xml
