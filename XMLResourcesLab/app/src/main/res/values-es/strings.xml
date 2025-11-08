@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">XMLResourcesLab</string>
+    <string name="welcome_message">¡Bienvenido al Laboratorio de Recursos XML!</string>
+    <string name="button_text">Haz clic para depurar</string>
+</resources>
