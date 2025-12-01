@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "579412441293",
+    "project_id": "slicehub-40d69",
+    "storage_bucket": "slicehub-40d69.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:579412441293:android:b481c463aba4c166071184",
+        "android_client_info": {
+          "package_name": "com.firstapp.slicehub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKrZdLaOnQIibSLhO0OTdvNhSUXBSUmAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
